@@ -5,9 +5,3 @@ runner_type: "python-script"
 description: Chatops greting!
 enabled: true
 entry_point: getroom.py
-parameters:
-    greeting:
-        type: string
-        description: Greeting you want to say to StackStorm (i.e. Hello, Hi, Yo, etc.)
-        required: true
-        position: 1
