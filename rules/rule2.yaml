@@ -7,5 +7,3 @@ trigger:
     type: hello_st2.event2
 action:
     ref: hello_st2.getroom
-    parameters:
-        greeting: Yo
