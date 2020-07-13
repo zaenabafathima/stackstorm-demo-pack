@@ -15,9 +15,9 @@ class ChatopsSensor(Sensor):
     def run(self):
         while not self._stop:
             self._logger.debug('HelloSensor dispatching trigger...')
-            payload = {'roomId': 'Y2lzY29zcGFyazovL3VzL1JPT00vODhiZjMyMjAtYzAzNi0xMWVhLTk0ZmEtMDFhYjAzYjFlNzc2'}
-            # self.sensor_service.dispatch(trigger='hello_st2.event2')
-            self.sensor_service.dispatch(trigger='cisco_spark.get_room', payload=payload)
+            # payload = {'roomId': 'Y2lzY29zcGFyazovL3VzL1JPT00vODhiZjMyMjAtYzAzNi0xMWVhLTk0ZmEtMDFhYjAzYjFlNzc2'}
+            self.sensor_service.dispatch(trigger='hello_st2.event2')
+            # self.sensor_service.dispatch(trigger='cisco_spark.get_room', payload=payload)
             eventlet.sleep(60)
 
     def cleanup(self):

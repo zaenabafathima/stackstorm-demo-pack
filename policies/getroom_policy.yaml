@@ -1,0 +1,9 @@
+---
+name: getroom.concurrency
+pack: hello_st2
+description: Limits the concurrent executions of the getroom action.
+enabled: true
+resource_ref: hello_st2.getroom
+policy_type: action.concurrency
+parameters:
+    threshold: 10
