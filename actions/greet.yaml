@@ -3,7 +3,7 @@ name: greet
 pack: hello_st2
 runner_type: "local-shell-script"
 description: Greet StackStorm!
-enabled: true
+enabled: false
 entry_point: greet.sh
 parameters:
     greeting:
