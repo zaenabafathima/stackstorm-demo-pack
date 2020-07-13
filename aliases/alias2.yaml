@@ -1,0 +1,7 @@
+---
+name: getroom
+pack: hello_st2
+description: "Get Webex Teams Room Info - StackStorm"
+action_ref: "hello_st2.getroom"
+formats:
+  - "getroom {{greeting}}"

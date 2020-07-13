@@ -1,0 +1,13 @@
+---
+name: getroom
+pack: hello_st2
+runner_type: "local-shell-script"
+description: Chatops greting!
+enabled: true
+entry_point: getroom.sh
+parameters:
+    greeting:
+        type: string
+        description: Greeting you want to say to StackStorm (i.e. Hello, Hi, Yo, etc.)
+        required: true
+        position: 1
