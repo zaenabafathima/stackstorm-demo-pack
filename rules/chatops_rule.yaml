@@ -1,5 +1,5 @@
 ---
-name: get_room_details_event
+name: on_get_room_details_event
 pack: hello_st2
 description: Chatops demo
 enabled: true

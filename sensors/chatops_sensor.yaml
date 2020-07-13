@@ -6,5 +6,3 @@ trigger_types:
   -
     name: "event2"
     description: "An example chatops trigger."
-    payload_schema:
-      type: "object"
