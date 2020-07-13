@@ -1,10 +1,10 @@
 ---
 name: getroom
 pack: hello_st2
-runner_type: "local-shell-script"
+runner_type: "python-script"
 description: Chatops greting!
 enabled: true
-entry_point: getroom.sh
+entry_point: getroom.py
 parameters:
     greeting:
         type: string
