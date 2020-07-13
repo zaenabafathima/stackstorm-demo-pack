@@ -6,4 +6,6 @@ enabled: true
 trigger:
     type: hello_st2.event2
 action:
-    ref: hello_st2.getroom
+    ref: cisco_spark.get_room
+    parameters:
+      roomId: Y2lzY29zcGFyazovL3VzL1JPT00vODhiZjMyMjAtYzAzNi0xMWVhLTk0ZmEtMDFhYjAzYjFlNzc2
