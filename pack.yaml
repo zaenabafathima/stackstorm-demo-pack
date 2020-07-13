@@ -23,6 +23,7 @@ python_versions:
 # exact version, tag, or branch.
 dependencies:
   - core
+  - https://github.com/tonybaloney/hubot-spark.git
 # Name of the pack author.
 author: Zaenab
 # Email of the pack author.
