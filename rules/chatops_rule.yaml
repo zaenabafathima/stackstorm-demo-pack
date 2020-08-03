@@ -10,4 +10,5 @@ trigger:
 action:
     ref: chatops.post_message
     parameters:
-      roomId: Y2lzY29zcGFyazovL3VzL1JPT00vNjNmZTg4ZjAtYzY4Zi0xMWVhLTkyODItN2RlNWEzMzUwNzVl
+      channel: Y2lzY29zcGFyazovL3VzL1JPT00vNjNmZTg4ZjAtYzY4Zi0xMWVhLTkyODItN2RlNWEzMzUwNzVl
+      message: 'Chatops says something!!'
