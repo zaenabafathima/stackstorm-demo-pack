@@ -1,7 +1,7 @@
 ---
-name: getroom
+name: saysomething
 pack: hello_st2
-description: "Get Webex Teams Room Info - StackStorm"
-action_ref: "hello_st2.getroom"
+description: "Command to get bot to say something"
+action_ref: "chatops.post_message"
 formats:
-  - "getroom"
+  - "say soemthing"

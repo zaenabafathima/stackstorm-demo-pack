@@ -1,11 +1,13 @@
 ---
-name: on_get_room_details_event
+name: on_saysomething
 pack: hello_st2
 description: Chatops demo
 enabled: true
 trigger:
-    type: hello_st2.event2
-action:
-    ref: cisco_spark.get_room
+    type: core.st2.webhook
     parameters:
-      roomId: Y2lzY29zcGFyazovL3VzL1JPT00vODhiZjMyMjAtYzAzNi0xMWVhLTk0ZmEtMDFhYjAzYjFlNzc2
+      url: messages3
+action:
+    ref: chatops.post_message
+    parameters:
+      roomId: Y2lzY29zcGFyazovL3VzL1JPT00vNjNmZTg4ZjAtYzY4Zi0xMWVhLTkyODItN2RlNWEzMzUwNzVl
