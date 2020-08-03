@@ -4,4 +4,4 @@ pack: hello_st2
 description: "Command to get bot to say something"
 action_ref: "chatops.post_message"
 formats:
-  - "say soemthing"
+  - "speak"
