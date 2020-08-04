@@ -4,6 +4,6 @@ pack: hello_st2
 description: "Command to get bot to say something"
 action_ref: "chatops.post_message"
 formats:
-  - "speak {{channel=Y2lzY29zcGFyazovL3VzL1JPT00vNjNmZTg4ZjAtYzY4Zi0xMWVhLTkyODItN2RlNWEzMzUwNzVl}} {{message}}"
-  - "gsse_helpster say {{channel=Y2lzY29zcGFyazovL3VzL1JPT00vNjNmZTg4ZjAtYzY4Zi0xMWVhLTkyODItN2RlNWEzMzUwNzVl}} {{message}}"
-  - "speak {{channel}} {{message}}"
+  - "speak {{user=''}} {{channel=Y2lzY29zcGFyazovL3VzL1JPT00vNjNmZTg4ZjAtYzY4Zi0xMWVhLTkyODItN2RlNWEzMzUwNzVl}} {{message}}"
+  - "gsse_helpster say {{user=''}} {{channel=Y2lzY29zcGFyazovL3VzL1JPT00vNjNmZTg4ZjAtYzY4Zi0xMWVhLTkyODItN2RlNWEzMzUwNzVl}} {{message}}"
+  - "speak {{user}} {{channel}} {{message}}"
