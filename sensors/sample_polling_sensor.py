@@ -19,6 +19,7 @@ class ApiPollingSensor(PollingSensor):
         payload = {
             'greeting': 'API Polling Working!',
         }
+        self._endpoint = 'http://www.google.com'
         try:
             api_response = requests.get(self._endpoint, verify=False)
             payload['response'] = api_response.json()
