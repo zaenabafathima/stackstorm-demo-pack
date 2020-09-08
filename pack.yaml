@@ -4,9 +4,9 @@
 ref: hello_st2
 # User-friendly pack name. If this attribute contains spaces or any other special characters, then
 # the "ref" attribute must also be specified (see above).
-name: My Demo Pack
+name: hello_st2
 # User-friendly pack description.
-description: Simple pack containing examples of sensor, rule, and action.
+description: My demo pack
 # Keywords which are used when searching for packs.
 keywords:
     - example
@@ -23,7 +23,6 @@ python_versions:
 # exact version, tag, or branch.
 dependencies:
   - core
-  - https://github.com/tonybaloney/hubot-spark.git
 # Name of the pack author.
 author: Zaenab
 # Email of the pack author.
