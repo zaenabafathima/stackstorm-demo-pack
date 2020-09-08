@@ -1,10 +1,10 @@
 import eventlet
 
-from st2reactor.sensor.base import Sensor
+from st2reactor.sensor.base import Sensor, PollingSensor
 
 
-class WorkingSensor(Sensor):
-    def __init__(self, sensor_service, config):
+class WorkingSensor(PollingSensor):
+    def __init__(self, sensor_service, config, poll_interval=5):
         super(WorkingSensor, self).__init__(sensor_service=sensor_service, config=config)
         self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._stop = False
@@ -12,7 +12,7 @@ class WorkingSensor(Sensor):
     def setup(self):
         pass
 
-    def run(self):
+    def poll(self):
         while not self._stop:
             self._logger.debug('WorkingSensor dispatching trigger...')
             count = self.sensor_service.get_value('hello_st2.count') or 0
