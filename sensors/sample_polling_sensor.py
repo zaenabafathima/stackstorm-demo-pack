@@ -1,6 +1,6 @@
-import eventlet
+import requests
 
-from st2reactor.sensor.base import Sensor, PollingSensor
+from st2reactor.sensor.base import PollingSensor
 
 
 class WorkingSensor(PollingSensor):
@@ -8,16 +8,19 @@ class WorkingSensor(PollingSensor):
         super(WorkingSensor, self).__init__(sensor_service=sensor_service, config=config)
         self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._stop = False
+        self._endpoint = 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
 
     def setup(self):
         pass
 
     def poll(self):
         self._logger.debug('WorkingSensor dispatching trigger...')
-        count = self.sensor_service.get_value('hello_st2.count') or 0
-        payload = {'greeting': 'Polling Working, StackStorm!', 'count': int(count) + 1}
-        self.sensor_service.dispatch(trigger='hello_st2.eventX', payload=payload)
-        self.sensor_service.set_value('hello_st2.count', payload['count'])
+        api_response = requests.get(self._endpoint)
+        payload = {
+            'greeting': 'API Polling Working!',
+            'response': api_response.json()
+        }
+        self.sensor_service.dispatch(trigger='hello_st2.integration_properties_fetch', payload=payload)
 
     def cleanup(self):
         self._stop = True
