@@ -16,7 +16,7 @@ class WorkingSensor(PollingSensor):
     def poll(self):
         self._logger.debug('WorkingSensor dispatching trigger...')
         # self.sensor_service.dispatch(trigger='hello_st2.eventX', payload={'greeting': 'Going to call API'})
-        api_response = requests.get('https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration')
+        api_response = requests.get('http://www.google.com')
         payload = {
             'greeting': 'API Polling Working!',
             # 'response': api_response.json()
