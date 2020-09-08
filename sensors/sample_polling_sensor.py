@@ -4,7 +4,7 @@ from st2reactor.sensor.base import PollingSensor
 
 
 class WorkingSensor(PollingSensor):
-    def __init__(self, sensor_service, config, poll_interval=30):
+    def __init__(self, sensor_service, config, poll_interval=60):
         super(WorkingSensor, self).__init__(sensor_service=sensor_service, config=config)
         self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._stop = False
@@ -15,7 +15,7 @@ class WorkingSensor(PollingSensor):
 
     def poll(self):
         self._logger.debug('WorkingSensor dispatching trigger...')
-        self.sensor_service.dispatch(trigger='hello_st2.eventX', payload={'greeting': 'Going to call API'})
+        # self.sensor_service.dispatch(trigger='hello_st2.eventX', payload={'greeting': 'Going to call API'})
         api_response = requests.get('https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration')
         payload = {
             'greeting': 'API Polling Working!',
