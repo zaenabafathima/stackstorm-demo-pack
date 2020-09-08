@@ -1,0 +1,20 @@
+---
+class_name: "WebpageTestStatusSensor"
+entry_point: "mdro_sensor.py"
+description: "A Sensor to check the status of webpagetest requests"
+trigger_types:
+  - name: "status_checker"
+    description: "WPT Status checker trigger"
+    payload_schema:
+      type: "object"
+      properties:
+        issue_key:
+          type: "string"
+        status:
+          type: "string"
+        test_id:
+          type: "string"
+        wpt_req:
+          type: "object"
+        wpt_response:
+          type: "object"
