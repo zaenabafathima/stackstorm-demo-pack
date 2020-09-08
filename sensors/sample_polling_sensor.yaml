@@ -1,5 +1,5 @@
 ---
-class_name: "WorkingSensor"
+class_name: "ApiPollingSensor"
 entry_point: "sample_polling_sensor.py"
 description: "Working Test sensor that emits triggers."
 trigger_types:
