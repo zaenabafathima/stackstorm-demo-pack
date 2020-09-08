@@ -8,17 +8,17 @@ class WorkingSensor(PollingSensor):
         super(WorkingSensor, self).__init__(sensor_service=sensor_service, config=config)
         self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._stop = False
-        self._endpoint = 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
+        # self._endpoint = 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
 
     def setup(self):
         pass
 
     def poll(self):
         self._logger.debug('WorkingSensor dispatching trigger...')
-        api_response = requests.get(self._endpoint)
+        # api_response = requests.get(self._endpoint)
         payload = {
             'greeting': 'API Polling Working!',
-            'response': api_response.json()
+            # 'response': api_response.json()
         }
         self.sensor_service.dispatch(trigger='hello_st2.eventX', payload=payload)
 
