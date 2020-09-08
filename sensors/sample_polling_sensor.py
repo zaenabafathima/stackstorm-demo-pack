@@ -1,3 +1,4 @@
+import json
 import requests
 
 from st2reactor.sensor.base import PollingSensor
@@ -18,13 +19,19 @@ class ApiPollingSensor(PollingSensor):
         self._logger.debug('WorkingSensor dispatching trigger...')
         payload = {
             'greeting': 'API Polling Working!',
+            'status': None,
+            'response': None
         }
         self._endpoint = 'http://www.google.com'
         try:
             api_response = requests.get(self._endpoint, verify=False)
+            payload['status'] = api_response.status_code
+            api_response.raise_for_status()
             payload['response'] = api_response.json()
-        except Exception as e:
-            payload['response'] = 'An error occured!' + str(e)
+        except requests.exceptions.HttpError as http_error:
+            payload['response'] = str(http_error)
+        except json.decoder.JSONDecodeError as json_err:
+            payload['response'] = 'JSON Decode Error! ' + str(json_err)
 
         self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
 
