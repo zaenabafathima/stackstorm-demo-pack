@@ -18,6 +18,18 @@ from st2reactor.sensor.base import PollingSensor
 #     * self._poll_interval
 #         - indicates the interval between two successive poll() calls.
 #     """
+#     def __init__(self, sensor_service, config=None, poll_interval=60):
+#         super(SamplePollingSensor, self).__init__(
+#             sensor_service=sensor_service, config=config, poll_interval=poll_interval
+#         )
+
+#         self._logger = self.sensor_service.get_logger(
+#             name=self.__class__.__name__)
+#         self._wpt_url = "https://webpagetest.org"
+#         self._key = None
+#         self._trigger_name = "status_checker"
+#         self._trigger_pack = "st2_poc"
+#         self._trigger_ref = ".".join([self._trigger_pack, self._trigger_name])
 
 #     def setup(self):
 #         # Setup stuff goes here. For example, you might establish connections
@@ -100,45 +112,55 @@ class WebpageTestStatusSensor(PollingSensor):
         return response.json()
 
     def poll(self):
-        wpt_queue_data = self.sensor_service.get_value(
-            "wpt_queue", local=False)
-        wpt_queue_items = []
-        self._logger.info("WPT Queue Data " + wpt_queue_data)
-        try:
-            wpt_queue_items = json.loads(wpt_queue_data)
-        except Exception as ex:
-            self._logger.error("Some error occurred: " + str(ex))
+        # wpt_queue_data = self.sensor_service.get_value(
+        #     "wpt_queue", local=False)
+        # wpt_queue_items = []
+        # self._logger.info("WPT Queue Data " + wpt_queue_data)
+        # try:
+        #     wpt_queue_items = json.loads(wpt_queue_data)
+        # except Exception as ex:
+        #     self._logger.error("Some error occurred: " + str(ex))
 
-        if len(wpt_queue_items) == 0:
-            self._logger.info("No items in queue")
-            return
+        # if len(wpt_queue_items) == 0:
+        #     self._logger.info("No items in queue")
+        #     return
 
-        updated_queue = []
-        for item in wpt_queue_items:
-            test_id = item.get("test_id")
-            if test_id:
-                data = self._get_test_status(test_id)
-                self._logger.info("Test Data received: %s", json.dumps(data))
-                if (
-                    data["statusCode"] in [200, 201, 202]
-                    and data["statusText"] == "Test Complete"
-                ):
-                    self.sensor_service.dispatch(
-                        trigger=self._trigger_ref,
-                        payload={
-                            "status": data["statusText"],
-                            "test_id": test_id,
-                            "issue_key": item.get("issue_key"),
-                            "wpt_req": item.get("wpt_req"),
-                            "wpt_response": data.get("data"),
-                        },
-                    )
-                else:
-                    updated_queue.append(copy.deepcopy(item))
+        # updated_queue = []
+        # for item in wpt_queue_items:
+        #     test_id = item.get("test_id")
+        #     if test_id:
+        #         data = self._get_test_status(test_id)
+        #         self._logger.info("Test Data received: %s", json.dumps(data))
+        #         if (
+        #             data["statusCode"] in [200, 201, 202]
+        #             and data["statusText"] == "Test Complete"
+        #         ):
+        #             self.sensor_service.dispatch(
+        #                 trigger=self._trigger_ref,
+        #                 payload={
+        #                     "status": data["statusText"],
+        #                     "test_id": test_id,
+        #                     "issue_key": item.get("issue_key"),
+        #                     "wpt_req": item.get("wpt_req"),
+        #                     "wpt_response": data.get("data"),
+        #                 },
+        #             )
+        #         else:
+        #             updated_queue.append(copy.deepcopy(item))
 
-        self._logger.info("Updated value: " + json.dumps(updated_queue))
-        self.sensor_service.set_value(
-            "wpt_queue", local=False, value=json.dumps(updated_queue)
+        # self._logger.info("Updated value: " + json.dumps(updated_queue))
+        # self.sensor_service.set_value(
+        #     "wpt_queue", local=False, value=json.dumps(updated_queue)
+        # )
+        self.sensor_service.dispatch(
+            trigger=self._trigger_ref,
+            payload={
+                "status": "TEST",
+                "test_id": "ID",
+                "issue_key": "ISSUE_KEY",
+                "wpt_req": "WPT_REQ",
+                "wpt_response": "RESP",
+            }
         )
 
     def cleanup(self):
