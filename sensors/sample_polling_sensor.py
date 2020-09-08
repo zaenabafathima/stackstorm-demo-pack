@@ -18,7 +18,7 @@ class WorkingSensor(PollingSensor):
         api_response = requests.get('http://www.google.com')
         payload = {
             'greeting': 'API Polling Working!',
-            'response': api_response.json()
+            'response': api_response.text
         }
         self.sensor_service.dispatch(trigger='hello_st2.eventX', payload=payload)
 
