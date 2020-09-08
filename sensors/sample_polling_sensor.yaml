@@ -1,16 +1,10 @@
 ---
-  class_name: "SamplePollingSensor"
-  entry_point: "sample_polling_sensor.py"
-  description: "Simple polling sensor that emits triggers."
-  poll_interval: 10
-  trigger_types:
-    -
-      name: "polling_event"
-      description: "An example trigger."
-      payload_schema:
-        type: "object"
-        properties:
-          executed_at:
-            type: "string"
-            format: "date-time"
-            default: "2014-07-30 05:04:24.578325"
+class_name: "WorkingSensor"
+entry_point: "sample_polling_sensor.py"
+description: "Working Test sensor that emits triggers."
+trigger_types:
+  -
+    name: "event1"
+    description: "An example trigger."
+    payload_schema:
+      type: "object"

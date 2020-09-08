@@ -1,57 +1,35 @@
-from st2reactor.sensor.base import PollingSensor
+import eventlet
+
+from st2reactor.sensor.base import Sensor
 
 
-class SamplePollingSensor(PollingSensor):
-    """
-    * self.sensor_service
-        - provides utilities like
-            get_logger() for writing to logs.
-            dispatch() for dispatching triggers into the system.
-    * self._config
-        - contains configuration that was specified as
-          config.yaml in the pack.
-    * self._poll_interval
-        - indicates the interval between two successive poll() calls.
-    """
+class WorkingSensor(Sensor):
+    def __init__(self, sensor_service, config):
+        super(WorkingSensor, self).__init__(sensor_service=sensor_service, config=config)
+        self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
+        self._stop = False
 
     def setup(self):
-        # Setup stuff goes here. For example, you might establish connections
-        # to external system once and reuse it. This is called only once by the system.
         pass
 
-    def poll(self):
-        # This is where the crux of the sensor work goes.
-        # This is called every self._poll_interval.
-        # For example, let's assume you want to query ec2 and get
-        # health information about your instances:
-        #   some_data = aws_client.get('')
-        #   payload = self._to_payload(some_data)
-        #   # _to_triggers is something you'd write to convert the data format you have
-        #   # into a standard python dictionary. This should follow the payload schema
-        #   # registered for the trigger.
-        #   self.sensor_service.dispatch(trigger, payload)
-        #   # You can refer to the trigger as dict
-        #   # { "name": ${trigger_name}, "pack": ${trigger_pack} }
-        #   # or just simply by reference as string.
-        #   # i.e. dispatch(${trigger_pack}.${trigger_name}, payload)
-        #   # E.g.: dispatch('examples.foo_sensor', {'k1': 'stuff', 'k2': 'foo'})
-        #   # trace_tag is a tag you would like to associate with the dispatched TriggerInstance
-        #   # Typically the trace_tag is unique and a reference to an external event.
-        pass
+    def run(self):
+        while not self._stop:
+            self._logger.debug('WorkingSensor dispatching trigger...')
+            count = self.sensor_service.get_value('hello_st2.count') or 0
+            payload = {'greeting': 'Working, StackStorm!', 'count': int(count) + 1}
+            self.sensor_service.dispatch(trigger='hello_st2.event1', payload=payload)
+            self.sensor_service.set_value('hello_st2.count', payload['count'])
+            eventlet.sleep(60)
 
     def cleanup(self):
-        # This is called when the st2 system goes down. You can perform cleanup operations like
-        # closing the connections to external system here.
-        pass
+        self._stop = True
 
+    # Methods required for programmable sensors.
     def add_trigger(self, trigger):
-        # This method is called when trigger is created
         pass
 
     def update_trigger(self, trigger):
-        # This method is called when trigger is updated
         pass
 
     def remove_trigger(self, trigger):
-        # This method is called when trigger is deleted
         pass
