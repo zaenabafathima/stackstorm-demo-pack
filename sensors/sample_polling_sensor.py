@@ -13,13 +13,11 @@ class WorkingSensor(PollingSensor):
         pass
 
     def poll(self):
-        # while not self._stop:
-            self._logger.debug('WorkingSensor dispatching trigger...')
-            count = self.sensor_service.get_value('hello_st2.count') or 0
-            payload = {'greeting': 'Polling Working, StackStorm!', 'count': int(count) + 1}
-            self.sensor_service.dispatch(trigger='hello_st2.event1', payload=payload)
-            self.sensor_service.set_value('hello_st2.count', payload['count'])
-            # eventlet.sleep(60)
+        self._logger.debug('WorkingSensor dispatching trigger...')
+        count = self.sensor_service.get_value('hello_st2.count') or 0
+        payload = {'greeting': 'Polling Working, StackStorm!', 'count': int(count) + 1}
+        self.sensor_service.dispatch(trigger='hello_st2.eventX', payload=payload)
+        self.sensor_service.set_value('hello_st2.count', payload['count'])
 
     def cleanup(self):
         self._stop = True
