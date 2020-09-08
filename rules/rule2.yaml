@@ -1,7 +1,7 @@
 ---
 name: on_integration_property_fetch
 pack: hello_st2
-description: Sample rule firing on hello_st2.eventX.
+description: Sample rule firing on hello_st2.integration_property_fetch.
 enabled: true
 trigger:
     type: hello_st2.integration_property_fetch

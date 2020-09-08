@@ -23,7 +23,6 @@ class ApiPollingSensor(PollingSensor):
             'status': None,
             'response': None
         }
-        self._endpoint = 'http://www.google.com'
         try:
             api_response = requests.get(self._endpoint, verify=False)
             payload['status'] = api_response.status_code
