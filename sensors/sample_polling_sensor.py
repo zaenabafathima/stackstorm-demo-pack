@@ -10,7 +10,8 @@ class ApiPollingSensor(PollingSensor):
         self._poll_interval = poll_interval
         self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._stop = False
-        self._endpoint = endpoint or 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
+        # self._endpoint = endpoint or 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
+        self._endpoint = 'http://localhost:8000/alias/aliases'
 
     def setup(self):
         pass
@@ -18,7 +19,7 @@ class ApiPollingSensor(PollingSensor):
     def poll(self):
         self._logger.debug('WorkingSensor dispatching trigger...')
         payload = {
-            'greeting': 'API Polling Working!',
+            'greeting': 'Local API Polling Working!',
             'status': None,
             'response': None
         }
@@ -28,8 +29,8 @@ class ApiPollingSensor(PollingSensor):
             payload['status'] = api_response.status_code
             api_response.raise_for_status()
             payload['response'] = api_response.json()
-        except requests.exceptions.HttpError as http_error:
-            payload['response'] = str(http_error)
+        except requests.exceptions.RequestException as err:
+            payload['response'] = str(err)
         except json.decoder.JSONDecodeError as json_err:
             payload['response'] = 'JSON Decode Error! ' + str(json_err)
 
