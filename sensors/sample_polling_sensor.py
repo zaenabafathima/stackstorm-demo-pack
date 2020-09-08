@@ -21,7 +21,7 @@ class WorkingSensor(PollingSensor):
             'greeting': 'API Polling Working!',
             'response': api_response.json()
         }
-        self.sensor_service.dispatch(trigger='hello_st2.eventX', payload=payload)
+        self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
 
     def cleanup(self):
         self._stop = True
