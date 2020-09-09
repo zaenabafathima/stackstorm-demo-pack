@@ -10,6 +10,7 @@ from urllib import parse
 LOGGER = logging.getLogger(__name__)
 
 from st2reactor.sensor.base import PollingSensor
+from sensors.sample_polling_sensor import ApiPollingSensor
 
 
 class ApiPollingSensor2(PollingSensor):
