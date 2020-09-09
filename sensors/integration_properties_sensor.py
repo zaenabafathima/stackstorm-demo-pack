@@ -14,10 +14,10 @@ from st2reactor.sensor.base import PollingSensor
 
 
 class IntegrationPropertiesSensor(PollingSensor):
-    def __init__(self, sensor_service, config, poll_interval=10, endpoint=''):
+    def __init__(self, sensor_service, config=None, poll_interval=10):
         super(IntegrationPropertiesSensor, self).__init__(
             sensor_service=sensor_service,
-            config=config,
+            config=config
             # poll_interval=poll_interval,
             # endpoint='http://www.google.com',
             # trigger='hello_st2.integration_property_fetch',

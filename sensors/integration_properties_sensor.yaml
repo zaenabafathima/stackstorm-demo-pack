@@ -1,7 +1,7 @@
 ---
-class_name: "IntegrationPropertySensor"
-entry_point: "integration_property_sensor.py"
-description: "Integration Property Sensor"
+class_name: "IntegrationPropertiesSensor"
+entry_point: "integration_properties_sensor.py"
+description: "Integration Properties Sensor"
 trigger_types:
   -
     name: "integration_property_fetch"
