@@ -26,7 +26,8 @@ class IntegrationPropertiesSensor(PollingSensor):
         self._poll_interval = poll_interval
 
     def poll(self):
-        self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload={'greeting': 'Integration greeting'})
+        print('In here')
+        self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch_2', payload={'greeting': 'Integration greeting'})
 
     def setup(self):
         """
