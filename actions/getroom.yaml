@@ -1,7 +1,0 @@
----
-name: getroom
-pack: hello_st2
-runner_type: "python-script"
-description: Chatops greting!
-enabled: true
-entry_point: getroom.py

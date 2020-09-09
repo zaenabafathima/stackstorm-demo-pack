@@ -1,8 +1,0 @@
----
-class_name: "ChatopsSensor"
-entry_point: "chatops_sensor.py"
-description: "Chatops sensor that emits triggers."
-trigger_types:
-  -
-    name: "event2"
-    description: "An example chatops trigger."
