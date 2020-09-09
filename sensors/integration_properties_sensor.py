@@ -22,6 +22,3 @@ class IntegrationPropertiesSensor(ApiPollingSensor):
             trigger='hello_st2.integration_property_fetch',
             greeting='Integration Property Sensor works!'
         )
-
-    def poll(self):
-        self.sensor_service.dispatch(trigger=self._trigger, payload={'greeting': 'Polling from integration properties'})
