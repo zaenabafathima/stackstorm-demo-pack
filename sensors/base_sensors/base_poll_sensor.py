@@ -26,7 +26,7 @@ class ApiPollingSensorBase(PollingSensor):
         """Initialize API Polling Sensor."""
         super().__init__(sensor_service=sensor_service, config=config)
         self._poll_interval = poll_interval
-        # self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
+        self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         # self._endpoint = 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
         self._endpoint = endpoint
         self._trigger = trigger
@@ -34,7 +34,7 @@ class ApiPollingSensorBase(PollingSensor):
         self.my_greeting = greeting
 
     def poll(self):
-        # self._logger.debug('WorkingSensor dispatching trigger...')
+        self._logger.debug('WorkingSensor dispatching trigger...')
         payload = {
             'greeting': self._greeting or '1 - Base API Polling Sensor',
             'status': None,
@@ -43,18 +43,17 @@ class ApiPollingSensorBase(PollingSensor):
             'message': self.my_greeting,
             'endpoint': self._endpoint
         }
-        self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
-        # try:
-        #     api_response = requests.get(self._endpoint, verify=False)
-        #     payload['status'] = api_response.status_code
-        #     api_response.raise_for_status()
-        #     payload['response'] = api_response.json()
-        # except requests.exceptions.RequestException as err:
-        #     payload['response'] = str(err)
-        # except json.decoder.JSONDecodeError as json_err:
-        #     payload['response'] = 'JSON Decode Error! ' + str(json_err)
+        try:
+            api_response = requests.get(self._endpoint, verify=False)
+            payload['status'] = api_response.status_code
+            api_response.raise_for_status()
+            payload['response'] = api_response.json()
+        except requests.exceptions.RequestException as err:
+            payload['response'] = str(err)
+        except json.decoder.JSONDecodeError as json_err:
+            payload['response'] = 'JSON Decode Error! ' + str(json_err)
 
-        # self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
+        self.sensor_service.dispatch(trigger=self._trigger, payload=payload)
 
     def setup(self):
         """
