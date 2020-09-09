@@ -19,41 +19,42 @@ class ApiPollingSensor2(ApiPollingSensor):
     def __init__(self,
                  sensor_service,
                  config=None,
-                 poll_interval=30,
+                 poll_interval=10,
                  endpoint='',
                  trigger='',
                  greeting=''
                  ):
         """Initialize API Polling Sensor."""
-        super().__init__(sensor_service=sensor_service, config=config, poll_interval=poll_interval,
-            endpoint='http://www.google.com',
-            trigger='hello_st2.integration_property_fetch',
-            greeting='FINALLY WORKING!!')
+        super().__init__(sensor_service=sensor_service, config=config)
+            # poll_interval=poll_interval,
+            # endpoint='http://www.google.com',
+            # trigger='hello_st2.integration_property_fetch',
+            # greeting='FINALLY WORKING!!')
         self._poll_interval = poll_interval
         # self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._endpoint = 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
         self._trigger = trigger or 'hello_st2.integration_property_fetch'
         self._greeting = greeting
 
-    # def poll(self):
-    #     # self._logger.debug('WorkingSensor dispatching trigger...')
-    #     payload = {
-    #         'greeting': self._greeting or 'API Polling Sensor 2',
-    #         'status': None,
-    #         'response': None
-    #     }
-    #     self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
-    #     # try:
-    #     #     api_response = requests.get(self._endpoint, verify=False)
-    #     #     payload['status'] = api_response.status_code
-    #     #     api_response.raise_for_status()
-    #     #     payload['response'] = api_response.json()
-    #     # except requests.exceptions.RequestException as err:
-    #     #     payload['response'] = str(err)
-    #     # except json.decoder.JSONDecodeError as json_err:
-    #     #     payload['response'] = 'JSON Decode Error! ' + str(json_err)
+    def poll(self):
+        # self._logger.debug('WorkingSensor dispatching trigger...')
+        payload = {
+            'greeting': self._greeting or 'API Polling Sensor 2',
+            'status': None,
+            'response': None
+        }
+        self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
+        # try:
+        #     api_response = requests.get(self._endpoint, verify=False)
+        #     payload['status'] = api_response.status_code
+        #     api_response.raise_for_status()
+        #     payload['response'] = api_response.json()
+        # except requests.exceptions.RequestException as err:
+        #     payload['response'] = str(err)
+        # except json.decoder.JSONDecodeError as json_err:
+        #     payload['response'] = 'JSON Decode Error! ' + str(json_err)
 
-    #     # self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
+        # self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
 
     def setup(self):
         """
