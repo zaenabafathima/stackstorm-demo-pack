@@ -26,7 +26,10 @@ class ApiPollingSensor2(ApiPollingSensorBase):
                  greeting=''
                  ):
         """Initialize API Polling Sensor."""
-        super().__init__(sensor_service=sensor_service, config=config)
+        super().__init__(sensor_service=sensor_service, config=config,
+                         endpoint='http://www,google.com',
+                         trigger='hello_st2.integration_property_fetch',
+                         greeting='FINALLY WORKING, YAY!!')
         self._poll_interval = poll_interval
         # self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._endpoint = 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
@@ -45,7 +48,7 @@ class ApiPollingSensor2(ApiPollingSensorBase):
         except Exception as e:
             payload['response'] = str(e)
         else:
-            payload['response'] = 'Imported the base!!' + str(ApiPollingSensorBase)
+            payload['response'] = '1 - Imported the base!!' + str(ApiPollingSensorBase)
         self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
         # try:
         #     api_response = requests.get(self._endpoint, verify=False)
