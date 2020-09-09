@@ -1,7 +1,7 @@
 ---
-class_name: "ApiPollingSensor2"
+class_name: "IntegrationPropertiesSensor"
 entry_point: "integration_properties_sensor.py"
-description: "Duplicate Working Test sensor that emits triggers."
+description: "Integration Properties polling sensor"
 trigger_types:
   -
     name: "integration_property_fetch"

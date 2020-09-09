@@ -1,18 +1,17 @@
 import json
 import requests
-import io
 import logging
 import time
 from typing import Union
 from urllib import parse
 
-
-LOGGER = logging.getLogger(__name__)
-
 from st2reactor.sensor.base import PollingSensor
 
 
-class ApiPollingSensorBase(PollingSensor):
+LOGGER = logging.getLogger(__name__)
+
+
+class ApiPollingSensor(PollingSensor):
     """Poll an API and return its response with status code."""
 
     def __init__(self,
