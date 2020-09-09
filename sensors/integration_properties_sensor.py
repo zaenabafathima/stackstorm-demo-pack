@@ -43,6 +43,8 @@ class ApiPollingSensor2(PollingSensor):
             from base_sensors.base_poll_sensor import ApiPollingSensorBase
         except Exception as e:
             payload['response'] = str(e)
+        else:
+            payload['response'] = 'Imported the base!!' + str(ApiPollingSensorBase)
         self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
         # try:
         #     api_response = requests.get(self._endpoint, verify=False)
