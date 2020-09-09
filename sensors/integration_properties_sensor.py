@@ -13,7 +13,7 @@ from st2reactor.sensor.base import PollingSensor
 from sensors.sample_polling_sensor import ApiPollingSensor
 
 
-class ApiPollingSensor2(ApiPollingSensor):
+class ApiPollingSensor2(PollingSensor):
     """Poll an API and return its response with status code."""
 
     def __init__(self,
