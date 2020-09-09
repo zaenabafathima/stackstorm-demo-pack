@@ -10,7 +10,7 @@ from urllib import parse
 LOGGER = logging.getLogger(__name__)
 
 from st2reactor.sensor.base import PollingSensor
-# from sensors.sample_polling_sensor import ApiPollingSensor
+
 
 
 class ApiPollingSensor2(PollingSensor):
@@ -39,6 +39,10 @@ class ApiPollingSensor2(PollingSensor):
             'status': None,
             'response': None
         }
+        try:
+            from sensors.sample_polling_sensor import ApiPollingSensor
+        except Exception as e:
+            payload['response'] = str(e)
         self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
         # try:
         #     api_response = requests.get(self._endpoint, verify=False)
