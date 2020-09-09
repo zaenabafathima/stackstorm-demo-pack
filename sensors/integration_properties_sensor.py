@@ -40,7 +40,7 @@ class ApiPollingSensor2(PollingSensor):
             'response': None
         }
         try:
-            from sensors.sample_polling_sensor import ApiPollingSensor
+            from base_sensors.base_poll_sensor import ApiPollingSensorBase
         except Exception as e:
             payload['response'] = str(e)
         self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
