@@ -47,6 +47,7 @@ class ApiPollingSensorBase(PollingSensor):
         }
         try:
             response = self.make_request_with_retry(url=self._endpoint,
+                                                    headers=self._headers,
                                                     params=self._params)
         except requests.exceptions.RequestException as err:
             payload['response'] = str(err)
