@@ -23,6 +23,6 @@ class ApiPollingSensor2(ApiPollingSensorBase):
         """Initialize API Polling Sensor."""
         super().__init__(sensor_service=sensor_service, config=config,
                          endpoint='http://www.google.com',
-                         trigger='hello_st2.event1',
+                         trigger='hello_st2.integration_property_fetch',
                          greeting='6 - STILL WORKING, YAY!!')
         self._poll_interval = poll_interval
