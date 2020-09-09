@@ -1,0 +1,10 @@
+---
+class_name: "IntegrationPropertySensor"
+entry_point: "integration_property_sensor.py"
+description: "Integration Property Sensor"
+trigger_types:
+  -
+    name: "integration_property_fetch"
+    description: "An example trigger."
+    payload_schema:
+      type: "object"
