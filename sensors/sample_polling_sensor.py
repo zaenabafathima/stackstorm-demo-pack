@@ -36,17 +36,17 @@ class ApiPollingSensor(PollingSensor):
             'response': None
         }
         self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
-        try:
-            api_response = requests.get(self._endpoint, verify=False)
-            payload['status'] = api_response.status_code
-            api_response.raise_for_status()
-            payload['response'] = api_response.json()
-        except requests.exceptions.RequestException as err:
-            payload['response'] = str(err)
-        except json.decoder.JSONDecodeError as json_err:
-            payload['response'] = 'JSON Decode Error! ' + str(json_err)
+        # try:
+        #     api_response = requests.get(self._endpoint, verify=False)
+        #     payload['status'] = api_response.status_code
+        #     api_response.raise_for_status()
+        #     payload['response'] = api_response.json()
+        # except requests.exceptions.RequestException as err:
+        #     payload['response'] = str(err)
+        # except json.decoder.JSONDecodeError as json_err:
+        #     payload['response'] = 'JSON Decode Error! ' + str(json_err)
 
-        self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
+        # self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
 
     def setup(self):
         """
