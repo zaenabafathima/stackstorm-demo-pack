@@ -17,15 +17,14 @@ class ApiPollingSensor(PollingSensor):
 
     def __init__(self,
                  sensor_service,
-                 config,
-                 poll_interval=60,
-                 endpoint=''):
+                 config=None,
+                 poll_interval=30):
         """Initialize API Polling Sensor."""
         super(ApiPollingSensor, self).__init__(sensor_service=sensor_service, config=config)
         # super().__init__(sensor_service=sensor_service, config=config)
         self._poll_interval = poll_interval
         self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
-        self._endpoint = endpoint or 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
+        self._endpoint = 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
         # self._trigger = trigger or 'hello_st2.integration_property_fetch'
         # self._greeting = greeting or 'using default'
 
@@ -48,6 +47,42 @@ class ApiPollingSensor(PollingSensor):
             payload['response'] = 'JSON Decode Error! ' + str(json_err)
 
         self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
+
+    def setup(self):
+        """
+        Run the sensor initialization / setup code (if any).
+        """
+        pass
+
+    def run(self):
+        """
+        Run the sensor.
+        """
+        pass
+
+    def cleanup(self):
+        """
+        Run the sensor cleanup code (if any).
+        """
+        pass
+
+    def add_trigger(self, trigger):
+        """
+        Runs when trigger is created
+        """
+        pass
+
+    def update_trigger(self, trigger):
+        """
+        Runs when trigger is updated
+        """
+        pass
+
+    def remove_trigger(self, trigger):
+        """
+        Runs when trigger is deleted
+        """
+        pass
 
     # def make_request_with_retry(
     #         self,
