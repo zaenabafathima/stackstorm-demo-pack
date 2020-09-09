@@ -24,35 +24,3 @@ class ApiPollingSensor2(ApiPollingSensorBase):
                          trigger='hello_st2.event1',
                          greeting='2 - STILL WORKING, YAY!!')
         self._poll_interval = poll_interval
-
-    # def setup(self):
-    #     """
-    #     Run the sensor initialization / setup code (if any).
-    #     """
-    #     pass
-
-    # def cleanup(self):
-    #     """
-    #     Run the sensor cleanup code (if any).
-    #     """
-    #     pass
-
-    # def add_trigger(self, trigger):
-    #     """
-    #     Runs when trigger is created
-    #     """
-    #     pass
-
-    # def update_trigger(self, trigger):
-    #     """
-    #     Runs when trigger is updated
-    #     """
-    #     pass
-
-    # def remove_trigger(self, trigger):
-    #     """
-    #     Runs when trigger is deleted
-    #     """
-    #     pass
-
-    
