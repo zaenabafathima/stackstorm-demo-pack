@@ -20,6 +20,8 @@ class ApiPollingSensorBase(PollingSensor):
                  config=None,
                  poll_interval=30,
                  endpoint='',
+                 params={},
+                 headers={},
                  trigger='',
                  greeting=''
                  ):
@@ -28,9 +30,10 @@ class ApiPollingSensorBase(PollingSensor):
         self._poll_interval = poll_interval
         self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._endpoint = endpoint
+        self._params = params
+        self._headers = headers
         self._trigger = trigger
         self._greeting = greeting
-        self.my_greeting = greeting
 
     def poll(self):
         self._logger.debug('WorkingSensor dispatching trigger...')
@@ -39,19 +42,18 @@ class ApiPollingSensorBase(PollingSensor):
             'status': None,
             'response': None,
             'trigger': self._trigger,
-            'message': self.my_greeting,
+            'message': self._greeting,
             'endpoint': self._endpoint
         }
-        # try:
-        #     api_response = requests.get(self._endpoint, verify=False)
-        #     payload['status'] = api_response.status_code
-        #     api_response.raise_for_status()
-        #     payload['response'] = api_response.json()
-        # except requests.exceptions.RequestException as err:
-        #     payload['response'] = str(err)
-        # except json.decoder.JSONDecodeError as json_err:
-        #     payload['response'] = 'JSON Decode Error! ' + str(json_err)
-
+        try:
+            response = self.make_request_with_retry(url=self._endpoint,
+                                                    params=self._params)
+        except requests.exceptions.RequestException as err:
+            payload['response'] = str(err)
+        try:
+            payload['response'] = response.json()
+        except json.decoder.JSONDecodeError:
+            payload['response'] = response.text
         self.sensor_service.dispatch(trigger=self._trigger, payload=payload)
 
     def setup(self):
@@ -76,9 +78,9 @@ class ApiPollingSensorBase(PollingSensor):
 
     def make_request_with_retry(
             self,
-            method: str,
             url: str,
             headers: dict,
+            method: str = 'GET',
             data: Union[dict, str] = None,
             params: dict = None,
             retry_count: int = None,
