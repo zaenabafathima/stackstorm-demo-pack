@@ -38,6 +38,7 @@ class ApiPollingSensor(PollingSensor):
             'status': None,
             'response': None
         }
+        self.sensor_service.dispatch(trigger=self._trigger, payload=payload)
         try:
             api_response = requests.get(self._endpoint, verify=False)
             payload['status'] = api_response.status_code
