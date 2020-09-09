@@ -10,10 +10,11 @@ from urllib import parse
 LOGGER = logging.getLogger(__name__)
 
 from st2reactor.sensor.base import PollingSensor
+from base_sensors.base_poll_sensor import ApiPollingSensorBase
 
 
 
-class ApiPollingSensor2(PollingSensor):
+class ApiPollingSensor2(ApiPollingSensorBase):
     """Poll an API and return its response with status code."""
 
     def __init__(self,
