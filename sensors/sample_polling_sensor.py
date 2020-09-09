@@ -19,26 +19,24 @@ class ApiPollingSensor(PollingSensor):
                  sensor_service,
                  config,
                  poll_interval=60,
-                 endpoint='',
-                 trigger='',
-                 greeting=''):
+                 endpoint=''):
         """Initialize API Polling Sensor."""
         super(ApiPollingSensor, self).__init__(sensor_service=sensor_service, config=config)
         # super().__init__(sensor_service=sensor_service, config=config)
         self._poll_interval = poll_interval
         self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._endpoint = endpoint or 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
-        self._trigger = trigger or 'hello_st2.integration_property_fetch'
-        self._greeting = greeting or 'using default'
+        # self._trigger = trigger or 'hello_st2.integration_property_fetch'
+        # self._greeting = greeting or 'using default'
 
     def poll(self):
         self._logger.debug('WorkingSensor dispatching trigger...')
         payload = {
-            'greeting': self._greeting,
+            'greeting': 'API Polling Sensor',
             'status': None,
             'response': None
         }
-        self.sensor_service.dispatch(trigger=self._trigger, payload=payload)
+        self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
         try:
             api_response = requests.get(self._endpoint, verify=False)
             payload['status'] = api_response.status_code
@@ -49,7 +47,7 @@ class ApiPollingSensor(PollingSensor):
         except json.decoder.JSONDecodeError as json_err:
             payload['response'] = 'JSON Decode Error! ' + str(json_err)
 
-        self.sensor_service.dispatch(trigger=self._trigger, payload=payload)
+        self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
 
     # def make_request_with_retry(
     #         self,
