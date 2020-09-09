@@ -15,6 +15,8 @@ class ApiPollingSensor2(ApiPollingSensorBase):
                  config=None,
                  poll_interval=10,
                  endpoint='',
+                 params={},
+                 headers={},
                  trigger='',
                  greeting=''
                  ):
@@ -22,5 +24,5 @@ class ApiPollingSensor2(ApiPollingSensorBase):
         super().__init__(sensor_service=sensor_service, config=config,
                          endpoint='http://www.google.com',
                          trigger='hello_st2.event1',
-                         greeting='3 - STILL WORKING, YAY!!')
+                         greeting='4 - STILL WORKING, YAY!!')
         self._poll_interval = poll_interval

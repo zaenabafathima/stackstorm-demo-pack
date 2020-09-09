@@ -50,10 +50,12 @@ class ApiPollingSensorBase(PollingSensor):
                                                     params=self._params)
         except requests.exceptions.RequestException as err:
             payload['response'] = str(err)
-        try:
-            payload['response'] = response.json()
-        except json.decoder.JSONDecodeError:
-            payload['response'] = response.text
+        except Exception as e:
+            payload['response'] = str(e)
+        # try:
+        #     payload['response'] = response.json()
+        # except json.decoder.JSONDecodeError:
+        #     payload['response'] = response.text
         self.sensor_service.dispatch(trigger=self._trigger, payload=payload)
 
     def setup(self):
