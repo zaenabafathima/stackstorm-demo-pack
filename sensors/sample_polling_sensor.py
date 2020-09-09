@@ -24,16 +24,16 @@ class ApiPollingSensor(PollingSensor):
                  greeting=''
                  ):
         """Initialize API Polling Sensor."""
-        super(ApiPollingSensor, self).__init__(sensor_service=sensor_service, config=config)
-        # super().__init__(sensor_service=sensor_service, config=config)
+        # super(ApiPollingSensor, self).__init__(sensor_service=sensor_service, config=config)
+        super().__init__(sensor_service=sensor_service, config=config)
         self._poll_interval = poll_interval
-        self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
+        # self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._endpoint = 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
         self._trigger = trigger or 'hello_st2.integration_property_fetch'
         self._greeting = greeting
 
     def poll(self):
-        self._logger.debug('WorkingSensor dispatching trigger...')
+        # self._logger.debug('WorkingSensor dispatching trigger...')
         payload = {
             'greeting': self._greeting or 'API Polling Sensor',
             'status': None,
