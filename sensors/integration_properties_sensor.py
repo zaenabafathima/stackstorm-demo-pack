@@ -36,31 +36,31 @@ class ApiPollingSensor2(ApiPollingSensorBase):
         self._trigger = trigger or 'hello_st2.integration_property_fetch'
         self._greeting = greeting
 
-    def poll(self):
-        # self._logger.debug('WorkingSensor dispatching trigger...')
-        payload = {
-            'greeting': self._greeting or 'DUPLICATE API Polling Sensor',
-            'status': None,
-            'response': None
-        }
-        try:
-            from base_sensors.base_poll_sensor import ApiPollingSensorBase
-        except Exception as e:
-            payload['response'] = str(e)
-        else:
-            payload['response'] = '1 - Imported the base!!' + str(ApiPollingSensorBase)
-        self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
-        # try:
-        #     api_response = requests.get(self._endpoint, verify=False)
-        #     payload['status'] = api_response.status_code
-        #     api_response.raise_for_status()
-        #     payload['response'] = api_response.json()
-        # except requests.exceptions.RequestException as err:
-        #     payload['response'] = str(err)
-        # except json.decoder.JSONDecodeError as json_err:
-        #     payload['response'] = 'JSON Decode Error! ' + str(json_err)
+    # def poll(self):
+    #     # self._logger.debug('WorkingSensor dispatching trigger...')
+    #     payload = {
+    #         'greeting': self._greeting or 'DUPLICATE API Polling Sensor',
+    #         'status': None,
+    #         'response': None
+    #     }
+    #     try:
+    #         from base_sensors.base_poll_sensor import ApiPollingSensorBase
+    #     except Exception as e:
+    #         payload['response'] = str(e)
+    #     else:
+    #         payload['response'] = '2 - Imported the base!!' + str(ApiPollingSensorBase)
+    #     self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
+    #     # try:
+    #     #     api_response = requests.get(self._endpoint, verify=False)
+    #     #     payload['status'] = api_response.status_code
+    #     #     api_response.raise_for_status()
+    #     #     payload['response'] = api_response.json()
+    #     # except requests.exceptions.RequestException as err:
+    #     #     payload['response'] = str(err)
+    #     # except json.decoder.JSONDecodeError as json_err:
+    #     #     payload['response'] = 'JSON Decode Error! ' + str(json_err)
 
-        # self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
+    #     # self.sensor_service.dispatch(trigger='hello_st2.integration_property_fetch', payload=payload)
 
     def setup(self):
         """
