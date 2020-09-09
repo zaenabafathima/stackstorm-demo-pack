@@ -24,7 +24,6 @@ class ApiPollingSensor(PollingSensor):
                  greeting=''
                  ):
         """Initialize API Polling Sensor."""
-        # super(ApiPollingSensor, self).__init__(sensor_service=sensor_service, config=config)
         super().__init__(sensor_service=sensor_service, config=config)
         self._poll_interval = poll_interval
         # self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)

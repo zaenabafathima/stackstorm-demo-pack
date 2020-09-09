@@ -9,10 +9,11 @@ from urllib import parse
 
 LOGGER = logging.getLogger(__name__)
 
-from sample_polling_sensor import ApiPollingSensor
+from sensors.sample_polling_sensor import ApiPollingSensor
+from st2reactor.sensor.base import PollingSensor
 
 
-class IntegrationPropertiesSensor(ApiPollingSensor):
+class IntegrationPropertiesSensor(ApiPollingSensor, PollingSensor):
     def __init__(self, sensor_service, config, poll_interval=60, endpoint=''):
         super(IntegrationPropertiesSensor, self).__init__(
             sensor_service=sensor_service,
