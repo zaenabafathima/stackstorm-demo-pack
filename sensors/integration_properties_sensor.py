@@ -29,7 +29,7 @@ class ApiPollingSensor2(ApiPollingSensorBase):
         super().__init__(sensor_service=sensor_service, config=config,
                          endpoint='http://www.google.com',
                          trigger='hello_st2.event1',
-                         greeting='STILL WORKING, YAY!!')
+                         greeting='1 - STILL WORKING, YAY!!')
         self._poll_interval = poll_interval
         # self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         # self._endpoint = 'https://zeroday-onboard.default.abattery.appbattery.nss1.tn.akamai.com/zeroday/v1/integration'
