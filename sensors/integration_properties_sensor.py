@@ -1,6 +1,6 @@
 import logging
 
-from . import ApiPollingSensorBase
+from base_api import ApiPollingSensorBase
 
 
 LOGGER = logging.getLogger(__name__)
