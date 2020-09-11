@@ -10,7 +10,14 @@ class MySensorSensorTestCase(BaseSensorTestCase):
     sensor_cls = IntegrationPropertiesSensor
 
     def test_method(self):
-        print("TEsting!!!!")
-        sensor = self.get_sensor_instance(config={'foo': 'bar'})
+        print("Testing!!!!")
+        sensor = self.get_sensor_instance(
+            config={
+                'foo': 'bar',
+                'poll_interval': 28
+            })
         sensor.poll()
+        self.assertEqual(len(self.get_dispatched_triggers()), 1)
+        print("Make request method:", sensor.make_request_with_retry)
+        print("Sensor poll time:", sensor._poll_interval)
         # ...
