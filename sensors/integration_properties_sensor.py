@@ -1,12 +1,12 @@
 import logging
 
-from base_sensors.base_poll_sensor import ApiPollingSensor
+from . import ApiPollingSensorBase
 
 
 LOGGER = logging.getLogger(__name__)
 
 
-class IntegrationPropertiesSensor(ApiPollingSensor):
+class IntegrationPropertiesSensor(ApiPollingSensorBase):
     """Poll integration_properties and return its response with status code."""
 
     def __init__(self,
