@@ -39,7 +39,7 @@ class MySensorSensorTestCase(BaseSensorTestCase):
             retry_count=retry_count,
             headers={},
         )
-        print("Mocked request called:", requests.request.call_count)
+        print("Mocked request call count:", requests.request.call_count)
         self.assertEqual(requests.request.call_count, retry_count)
         requests.request.return_value = MockResponse({}, 400)
         sensor.make_request_with_retry(
@@ -49,7 +49,7 @@ class MySensorSensorTestCase(BaseSensorTestCase):
             retry_count=retry_count,
             headers={},
         )
-        print("Mocked request called:", requests.request.call_count)
+        print("Mocked request call count:", requests.request.call_count)
         self.assertEqual(requests.request.call_count, 1)
         requests.request.return_value = MockResponse({}, 200)
         sensor.make_request_with_retry(
@@ -59,5 +59,5 @@ class MySensorSensorTestCase(BaseSensorTestCase):
             retry_count=retry_count,
             headers={},
         )
-        print("Mocked request called:", requests.request.call_count)
+        print("Mocked request call count:", requests.request.call_count)
         self.assertEqual(requests.request.call_count, 1)

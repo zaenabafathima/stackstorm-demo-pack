@@ -170,11 +170,11 @@ class ApiPollingSensorBase(PollingSensor):
                     requests.exceptions.ChunkedEncodingError,
             ) as exc:
                 print(
-                    "cannot complete request due to %s for report_id %s api structure %s",
-                    str(exc),
-                    report_id,
-                    api_struct,
-                )
+                    "cannot complete request due to {} for report_id {} api structure {}".format(
+                        str(exc),
+                        report_id,
+                        api_struct,
+                    ))
                 request_exception_occurred = True
 
             while retry_count > 0 and (
@@ -196,31 +196,44 @@ class ApiPollingSensorBase(PollingSensor):
                         )
                     )
                 print(
-                    "sleeping for %s seconds, report_id %s api structure %s retry count=%s",
-                    cur_retry_wait_time,
-                    report_id,
-                    api_struct,
-                    retry_count
-                )
+                    "sleeping for {0} seconds, report_id {1} api structure {2} retry count={3}"
+                    .format(
+                        cur_retry_wait_time,
+                        report_id,
+                        api_struct,
+                        retry_count
+                    ))
+                retry_count -= 1
                 time.sleep(cur_retry_wait_time)
                 LOGGER.info(
-                    "making request now for report_id %s api structure %s, remaining retry counts %s",
-                    report_id,
-                    api_struct,
-                    retry_count - 1,
-                )
+                    "making request now for report_id {} api structure {}, remaining retry counts {}".format(
+                        report_id,
+                        api_struct,
+                        retry_count - 1,
+                    ))
                 start_time = time.time()
+                try:
+                    response = requests.request(**request_args)
+                except (
+                    requests.exceptions.HTTPError,
+                    requests.exceptions.ConnectionError,
+                    requests.exceptions.ConnectTimeout,
+                    requests.exceptions.ChunkedEncodingError,
+                ) as exc:
+                    LOGGER.error("cannot complete request due to %s", str(exc))
+                    request_exception_occurred = True
+                retry_count -= 1
             if response is None:
                 raise requests.exceptions.ConnectionError(
                     "cannot complete request due to HTTP connection error"
                 )
             if response.status_code in [200, 201]:
                 LOGGER.info(
-                    "Total time taken for api structure %s report_id %s is %s seconds",
-                    api_struct,
-                    report_id,
-                    int(time.time() - start_time),
-                )
+                    "Total time taken for api structure {0} report_id {1} is {2} seconds".format(
+                        api_struct,
+                        report_id,
+                        int(time.time() - start_time),
+                    ))
             elif response.status_code < 500:
                 LOGGER.error(
                     err_msg.format(
@@ -235,9 +248,11 @@ class ApiPollingSensorBase(PollingSensor):
                         response=response.content,
                     )
                 )
+            print("Returning response with status code:", response.status_code)
             return response
         except Exception as exc:
             if type(exc).__name__ != requests.exceptions.ConnectionError.__name__:
 
                 LOGGER.exception("Unhandled exception in make_request_with_retry")
             raise
+
