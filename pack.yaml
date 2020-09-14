@@ -6,7 +6,7 @@ ref: hello_st2
 # the "ref" attribute must also be specified (see above).
 name: hello_st2
 # User-friendly pack description.
-description: NEW - My demo pack
+description: NEW!!! - My demo pack
 # Keywords which are used when searching for packs.
 keywords:
     - example

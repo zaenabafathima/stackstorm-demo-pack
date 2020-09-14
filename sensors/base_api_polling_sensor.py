@@ -44,23 +44,23 @@ class ApiPollingSensorBase(PollingSensor):
             'endpoint': self._endpoint,
             'is_valid_json': True
         }
-        try:
-            response = self.make_request_with_retry(url=self._endpoint,
-                                                    headers=self._headers,
-                                                    params=self._params)
-        except requests.exceptions.RequestException as err:
-            payload['response'] = str(err)
-        except Exception as e:
-            payload['response'] = str(e)
-        else:
-            payload['status_code'] = response.status_code
-            try:
-                payload['response'] = response.json()
-            except json.decoder.JSONDecodeError as err:
-                payload['response'] = str(err)
-                payload['is_valid_json'] = False
-            except Exception as e:
-                payload['response'] = str(e)
+        # try:
+        #     response = self.make_request_with_retry(url=self._endpoint,
+        #                                             headers=self._headers,
+        #                                             params=self._params)
+        # except requests.exceptions.RequestException as err:
+        #     payload['response'] = str(err)
+        # except Exception as e:
+        #     payload['response'] = str(e)
+        # else:
+        #     payload['status_code'] = response.status_code
+        #     try:
+        #         payload['response'] = response.json()
+        #     except json.decoder.JSONDecodeError as err:
+        #         payload['response'] = str(err)
+        #         payload['is_valid_json'] = False
+        #     except Exception as e:
+        #         payload['response'] = str(e)
         self.sensor_service.dispatch(trigger=self._trigger, payload=payload)
 
     def setup(self):
